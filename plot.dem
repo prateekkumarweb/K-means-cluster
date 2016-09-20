@@ -1,0 +1,5 @@
+# Plot of points
+set terminal svg
+set output 'cluster.svg'
+plot 'points.dat' using 1:2:3 with points palette pointtype 7 pointsize 0.5
+reset
