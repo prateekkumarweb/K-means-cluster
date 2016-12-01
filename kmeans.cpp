@@ -139,6 +139,7 @@ void getCluster(Point *p, int n, int c) {
             pm[i] = Point(m[i].getX(), m[i].getY());
         }
     }
+    delete m;
 }
 
 int main(int argc, char const * argv[] ) {
