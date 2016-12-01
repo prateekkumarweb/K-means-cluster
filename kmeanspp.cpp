@@ -21,6 +21,19 @@ int getIntRand(int s, int e) {
     return dist(gen);
 }
 
+int getIntRand(int n, double *d) {
+    double r = getRand();
+    for (int i=0; i<n; i++) {
+        if (i!=0) {
+            d[i] += d[i-1];
+        }
+        if (r < d[i]) {
+            return i;
+        }
+    }
+    return n-1;
+}
+
 class Point {
 public:
     Point(double xc = 0, double yc = 0) {
@@ -116,11 +129,42 @@ void cluster(Point *p, int n, Point *m, int nm) {
     }
 }
 
+void genRandPoints(Point *p, int n, Point *m, int c) {
+    double *d = new double[n];
+    double sum = 0;
+    int *cc = new int[c];
+    cc[0] = getIntRand(0, n);
+    for (int i=1; i<c; i++) {
+        sum = 0;
+        for (int j=0; j<n; j++) {
+            d[j] = -1;
+            for (int k=0; k<=i; k++) {
+                if (cc[k] != j) {
+                    double dst = Point::distance(p[cc[k]], p[j]);
+                    dst = dst*dst;
+                    if (d[j] < 0 || dst < d[j]) {
+                        d[j] = dst;
+                    }
+                }
+                else {
+                    d[j] = 0;
+                }
+            }
+            sum += d[j];
+        }
+        for (int j=0; j<n; j++) {
+            d[j] = d[j] / sum;
+        }
+        cc[i] = getIntRand(n, d);
+    }
+    for (int i=0; i<c; i++) {
+        m[i] = p[cc[i]];
+    }
+}
+
 void getCluster(Point *p, int n, int c) {
     Point *m = new Point[c];
-    for (int i = 0; i < c; ++i) {
-        m[i] = p[getIntRand(i*n/c, (i+1)*n/c)];
-    }
+    genRandPoints(p, n, m, c);
     Point *pm = new Point[c];
     for (int i = 0; i < c; ++i) {
         pm[i] = Point(m[i].getX(), m[i].getY());
