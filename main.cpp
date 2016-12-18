@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <random>
+#include <ctime>
 
 using namespace std;
 
@@ -304,11 +305,18 @@ int main(int argc, char const * argv[] ) {
         p[i] = Point(getNormalRand(pp.getX(), sd), getNormalRand(pp.getY(), sd));
     }
     delete m;
+    clock_t s, e;
+    s = clock(); 
     getCluster(p, n, c);
+    e = clock();
+    cout << "Time taken : " << (double)(e-s)/CLOCKS_PER_SEC << endl;
     for (int j = 0; j < n; ++j) {
         f1 << p[j].getX() << " " << p[j].getY() << " " << p[j].getColor() << endl;
     }
+    s = clock();
     getClusterpp(p, n, c);
+    e = clock();
+    cout << "Time taken : " << (double)(e-s)/CLOCKS_PER_SEC << endl;
     for (int j = 0; j < n; ++j) {
         f2 << p[j].getX() << " " << p[j].getY() << " " << p[j].getColor() << endl;
     }

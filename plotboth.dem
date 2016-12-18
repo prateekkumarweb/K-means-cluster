@@ -1,9 +1,9 @@
 # Plot of points
-set terminal canvas
-set output 'cluster1.html'
+set terminal png
+set output 'cluster1.png'
 plot 'points1.dat' using 1:2:3 with points palette pointtype 7 pointsize 0.5
 reset
-set terminal canvas
-set output 'cluster2.html'
+set terminal png
+set output 'cluster2.png'
 plot 'points2.dat' using 1:2:3 with points palette pointtype 7 pointsize 0.5
 reset
