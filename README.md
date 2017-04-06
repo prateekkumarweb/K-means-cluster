@@ -18,9 +18,10 @@ $ gnuplot plotboth.dem
 
 ## Plots done for random points
 
+### K-MEANS
 ![Cluster 1](cluster1.png)
 
+### K-MEANS++
 ![Cluster 2](cluster2.png)
 
-
-LICENSE : MIT
+LICENSE : [MIT](https://github.com/prateekkumarweb/K-means-cluster/blob/master/LICENSE)
